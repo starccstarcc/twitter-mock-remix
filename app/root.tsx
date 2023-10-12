@@ -8,8 +8,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
+import tailwindStyleSheetUrl from './styles/tailwind.css'
 
 export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: tailwindStyleSheetUrl },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
 
