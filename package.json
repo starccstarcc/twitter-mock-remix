@@ -14,11 +14,13 @@
     "db:generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
+    "@0xaddm/cn": "^1.0.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@remix-run/css-bundle": "^2.0.1",
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
     "@remix-run/serve": "^2.0.1",
+    "class-variance-authority": "^0.7.0",
     "drizzle-orm": "^0.28.6",
     "isbot": "^3.6.8",
     "pg": "^8.11.3",

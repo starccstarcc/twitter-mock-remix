@@ -1,8 +1,9 @@
 import { AppleIcon, BrandIcon, GoogleIcon } from '~/components/icons'
+import { Button } from '~/components/ui/button'
 
 export default function LoginPage() {
   return (
-    <div>
+    <div className="flex grow flex-col justify-between">
       <div className="p-5">
         <BrandIcon width={45} height={45} className="mb-3" />
         <main>
@@ -14,14 +15,14 @@ export default function LoginPage() {
               Join today.
             </h2>
             <div className="flex flex-col gap-4">
-              <button className="flex w-full items-center justify-center rounded-3xl bg-white p-2 text-background">
+              <Button>
                 <GoogleIcon className="mr-2 h-4 w-4" />
                 Sign up with Google
-              </button>
-              <button className="flex w-full items-center justify-center rounded-3xl bg-white p-2 text-background">
+              </Button>
+              <Button>
                 <AppleIcon className="mr-2 h-4 w-4" />
                 Sign up with Apple
-              </button>
+              </Button>
             </div>
             <div className="relative my-2">
               <div className="absolute inset-0 flex items-center">
@@ -32,9 +33,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button className="flex w-full items-center justify-center rounded-3xl bg-primary p-2 font-bold">
-              Create account
-            </button>
+            <Button variant="primary">Create account</Button>
             <span className="text-xs tracking-tighter text-secondary">
               By signing up, you agree to the{' '}
               <span className="font-semibold text-primary">
@@ -42,21 +41,19 @@ export default function LoginPage() {
               </span>{' '}
               and{' '}
               <span className="font-semibold text-primary">Privacy Policy</span>
-              , including
+              , including{' '}
               <span className="font-semibold text-primary">Cookie Use</span>.
             </span>
             <section className="mt-10 flex flex-col gap-4">
               <h3 className="leading-tighter text-lg font-bold">
                 Already have an account?
               </h3>
-              <button className="flex w-full items-center justify-center rounded-3xl border border-secondary bg-background p-2 font-bold text-primary">
-                Sign in
-              </button>
+              <Button variant="outline">Sign in</Button>
             </section>
           </article>
         </main>
       </div>
-      <footer className="mt-4">
+      <footer className="mt-10">
         <ul className="flex min-w-0 flex-wrap justify-center gap-2 text-sm font-semibold text-secondary">
           <li>About</li>
           <li>Download the X app</li>
