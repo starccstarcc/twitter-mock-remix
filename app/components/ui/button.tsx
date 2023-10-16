@@ -7,7 +7,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-white text-background',
+        default:
+          'bg-white text-background aria-disabled:opacity-50 aria-disabled:cursor-not-allowed',
         primary: 'bg-primary text-white',
         outline: 'border border-secondary bg-transparent text-primary',
       },
@@ -22,11 +23,16 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants>
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, ...props }, ref) => {
+  ({ className, variant, disabled, onClick, ...props }, ref) => {
     return (
       <button
         className={cn(buttonVariants({ variant }), className)}
         ref={ref}
+        aria-disabled={disabled}
+        onClick={e => {
+          if (disabled) return
+          onClick?.(e)
+        }}
         {...props}
       />
     )
