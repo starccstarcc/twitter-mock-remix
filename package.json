@@ -8,7 +8,10 @@
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "format": "prettier --write .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
@@ -16,7 +19,10 @@
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
     "@remix-run/serve": "^2.0.1",
+    "drizzle-orm": "^0.28.6",
     "isbot": "^3.6.8",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -26,6 +32,7 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.16",
+    "drizzle-kit": "^0.19.13",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.3",
