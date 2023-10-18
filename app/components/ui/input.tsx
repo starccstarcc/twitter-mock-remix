@@ -10,7 +10,7 @@ type InputProps = Omit<
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, ...props }, ref) => {
+  ({ label, error, className, ...props }, ref) => {
     const id = React.useId()
     const errorId = React.useId()
 
@@ -21,6 +21,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={id}
           className={cn(
             'peer block w-full rounded-md border border-secondary bg-background px-2.5 pb-2.5 pt-5 text-sm text-text',
+            className,
             {
               'border-red-600 outline-red-600': !!error,
             },
