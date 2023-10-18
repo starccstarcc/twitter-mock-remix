@@ -2,7 +2,7 @@ import { Link, Outlet } from '@remix-run/react'
 import { AppleIcon, BrandIcon, GoogleIcon } from '~/components/icons'
 import { Button, buttonVariants } from '~/components/ui/button'
 
-export default function LoginPage() {
+export default function AuthPage() {
   return (
     <div className="flex w-full grow flex-col justify-between lg:items-center lg:justify-center">
       <div className="mx-auto grid max-w-[600px] p-5 lg:container lg:mx-0 lg:max-w-7xl  lg:grid-cols-[3fr,2fr] lg:items-center">
