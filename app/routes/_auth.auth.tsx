@@ -1,5 +1,6 @@
+import { Link, Outlet } from '@remix-run/react'
 import { AppleIcon, BrandIcon, GoogleIcon } from '~/components/icons'
-import { Button } from '~/components/ui/button'
+import { Button, buttonVariants } from '~/components/ui/button'
 
 export default function LoginPage() {
   return (
@@ -37,7 +38,12 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="w-[300px]">
-              <Button variant="primary">Create account</Button>
+              <Link
+                to="/auth/signin"
+                className={buttonVariants({ variant: 'primary' })}
+              >
+                Create account
+              </Link>
               <span className="text-xs tracking-tighter text-secondary">
                 By signing up, you agree to the{' '}
                 <span className="font-semibold text-primary">
@@ -60,29 +66,36 @@ export default function LoginPage() {
           </article>
         </main>
       </div>
-      <footer className="mt-10">
-        <ul className="flex min-w-0 flex-wrap justify-center gap-2 text-sm font-semibold text-secondary">
-          <li>About</li>
-          <li>Download the X app</li>
-          <li>Help Center</li>
-          <li>Terms of Service</li>
-          <li>Privacy Policy</li>
-          <li>Cookie Policy</li>
-          <li>Accessibility</li>
-          <li>Ads info</li>
-          <li>Blog</li>
-          <li>Status</li>
-          <li>Careers</li>
-          <li>Brand Resources</li>
-          <li>Advertising</li>
-          <li>Marketing</li>
-          <li>X for Business</li>
-          <li>Developers</li>
-          <li>Directory</li>
-          <li>Settings</li>
-          <li>© 2023 X Corp.</li>
-        </ul>
-      </footer>
+      <Outlet />
+      <Footer />
     </div>
+  )
+}
+
+export function Footer() {
+  return (
+    <footer className="mt-10">
+      <ul className="flex min-w-0 flex-wrap justify-center gap-2 text-sm font-semibold text-secondary">
+        <li>About</li>
+        <li>Download the X app</li>
+        <li>Help Center</li>
+        <li>Terms of Service</li>
+        <li>Privacy Policy</li>
+        <li>Cookie Policy</li>
+        <li>Accessibility</li>
+        <li>Ads info</li>
+        <li>Blog</li>
+        <li>Status</li>
+        <li>Careers</li>
+        <li>Brand Resources</li>
+        <li>Advertising</li>
+        <li>Marketing</li>
+        <li>X for Business</li>
+        <li>Developers</li>
+        <li>Directory</li>
+        <li>Settings</li>
+        <li>© 2023 X Corp.</li>
+      </ul>
+    </footer>
   )
 }
