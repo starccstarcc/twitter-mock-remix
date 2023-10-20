@@ -5,7 +5,7 @@ import {
   type LoaderFunctionArgs,
 } from '@remix-run/node'
 import { Form, useActionData, useNavigate } from '@remix-run/react'
-import { z } from 'zod'
+
 import { parse } from '@conform-to/zod'
 import { Button } from '~/components/ui/button'
 import {
@@ -18,46 +18,39 @@ import { Input } from '~/components/ui/input'
 import { Select, SelectOption } from '~/components/ui/select'
 import { MONTHS, DAYS, YEARS } from '~/constants/date'
 import { useForm } from '@conform-to/react'
-import { onboarding } from '~/utils/onboarding-session.server'
-
-export const schema = z.object({
-  email: z.string().email(),
-  name: z.string().max(50),
-  year: z.number().min(1900).max(new Date().getFullYear()),
-  month: z.number().int().min(1).max(12),
-  day: z.number().int().min(1).max(31),
-})
+import {
+  stepOneOnboardingSchema,
+  createOnboardingStepOneSession,
+  getOnboardingStepOneData,
+} from '~/utils/onboarding.server'
+import { getUserByEmail } from '~/models/user.server'
 
 export async function action({ request }: ActionFunctionArgs) {
   const fd = await request.formData()
 
-  const submission = parse(fd, { schema })
+  const submission = parse(fd, { schema: stepOneOnboardingSchema })
 
   if (submission.intent !== 'submit' || !submission.value) {
     return json(submission)
   }
 
-  const session = await onboarding.getSession()
+  const userExists = await getUserByEmail(submission.value.email)
+  if (userExists) {
+    return redirect('/auth/login')
+  }
 
-  session.set('step-1', submission.value)
-
-  return redirect('/auth/signup/2', {
-    headers: {
-      'Set-Cookie': await onboarding.commitSession(session),
-    },
+  return await createOnboardingStepOneSession({
+    request,
+    redirectTo: '/auth/signup/2',
+    value: submission.value,
   })
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await onboarding.getSession(request.headers.get('Cookie'))
-  const isStepOneCompleted = session.get('step-1')
+  const onboardingStepOneData = await getOnboardingStepOneData(request)
 
-  if (isStepOneCompleted) {
-    return redirect('/auth/signup/2', {
-      headers: {
-        'Set-Cookie': await onboarding.commitSession(session),
-      },
-    })
+  if (onboardingStepOneData) {
+    return redirect('/auth/signup/2')
   }
 
   return null
