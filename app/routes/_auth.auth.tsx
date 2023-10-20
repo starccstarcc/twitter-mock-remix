@@ -39,7 +39,7 @@ export default function AuthPage() {
             </div>
             <div className="w-[300px]">
               <Link
-                to="/auth/signin"
+                to="/auth/signup/1"
                 className={buttonVariants({ variant: 'primary' })}
               >
                 Create account
