@@ -60,7 +60,12 @@ export default function AuthPage() {
                 <h3 className="leading-tighter text-lg font-bold">
                   Already have an account?
                 </h3>
-                <Button variant="outline">Sign in</Button>
+                <Link
+                  to="/auth/signin"
+                  className={buttonVariants({ variant: 'outline' })}
+                >
+                  Sign in
+                </Link>
               </section>
             </div>
           </article>

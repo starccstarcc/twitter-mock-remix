@@ -83,8 +83,8 @@ export default function SignUpStepTwoPage() {
   })
 
   return (
-    <Dialog open onOpenChange={e => navigate('/auth')}>
-      <DialogContent>
+    <Dialog open onOpenChange={() => navigate('/auth')}>
+      <DialogContent className="max-w-3xl">
         <div className="flex h-14 items-center gap-6">
           <DialogClose onClick={() => navigate('/auth')} />
           <DialogTitle>Step 2 of 2</DialogTitle>

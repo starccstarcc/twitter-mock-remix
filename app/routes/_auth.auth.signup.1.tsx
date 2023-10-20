@@ -66,7 +66,7 @@ export default function SignUpStepOnePage() {
 
   return (
     <Dialog open onOpenChange={e => navigate('/auth')}>
-      <DialogContent>
+      <DialogContent className="max-w-3xl">
         <div className="flex h-14 items-center gap-6">
           <DialogClose onClick={() => navigate('/auth')} />
           <DialogTitle>Step 1 of 2</DialogTitle>

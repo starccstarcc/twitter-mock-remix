@@ -1,4 +1,6 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node'
+import bcrypt from 'bcryptjs'
+import { getUserByEmail } from '~/models/user.server'
 
 const USER_SESSION_KEY = 'userId'
 
@@ -42,4 +44,25 @@ export async function createUserSession({
       'Set-Cookie': await userSession.commitSession(session),
     },
   })
+}
+
+export async function login({
+  password,
+  email,
+}: {
+  password: string
+  email: string
+}) {
+  const user = await getUserByEmail(email)
+
+  if (!user || !user?.password) {
+    return null
+  }
+
+  const isCorrectPassword = await bcrypt.compare(password, user.password)
+  if (!isCorrectPassword) {
+    return null
+  }
+
+  return user
 }
