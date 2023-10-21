@@ -6,6 +6,8 @@ import { UserAvatar } from '~/components/ui/avatar'
 export default function HomePage() {
   const location = useLocation()
 
+  console.log(location)
+
   return (
     <div className="fixed top-0">
       <div className="grid h-[53px] grid-cols-[1fr,max-content,1fr] items-center px-4">
@@ -27,7 +29,10 @@ export default function HomePage() {
               </Link>
             </Tabs.Trigger>
             <Tabs.Trigger asChild value="/following">
-              <Link to="/following" className="text-md py-3 font-bold">
+              <Link
+                to="/following"
+                className="text-md py-3 font-bold data-[state=active]:border-b-2 data-[state=active]:border-primary"
+              >
                 Following
               </Link>
             </Tabs.Trigger>
