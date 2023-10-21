@@ -1,9 +1,9 @@
 import { useForm } from '@conform-to/react'
-import {
-  redirect,
-  type LoaderFunctionArgs,
-  type ActionFunctionArgs,
-  json,
+import { redirect, json } from '@remix-run/node'
+import type {
+  MetaFunction,
+  LoaderFunctionArgs,
+  ActionFunctionArgs,
 } from '@remix-run/node'
 import { Form, useActionData, useNavigate } from '@remix-run/react'
 import { Button } from '~/components/ui/button'
@@ -24,6 +24,13 @@ import { parse } from '@conform-to/zod'
 
 import { createUser, getUserByEmail, hashPassword } from '~/models/user.server'
 import { createUserSession } from '~/utils/user-session.server'
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Sign Up - Step 2' },
+    { name: 'description', content: 'Sign up to twitter clone' },
+  ]
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const fd = await request.formData()

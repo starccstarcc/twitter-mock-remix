@@ -1,6 +1,14 @@
+import type { MetaFunction } from '@remix-run/react'
 import { Link, Outlet } from '@remix-run/react'
 import { AppleIcon, BrandIcon, GoogleIcon } from '~/components/icons'
 import { Button, buttonVariants } from '~/components/ui/button'
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Twitter Clone' },
+    { name: 'description', content: 'Twitter clone made with Remix' },
+  ]
+}
 
 export default function AuthPage() {
   return (

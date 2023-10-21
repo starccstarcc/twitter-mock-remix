@@ -1,5 +1,6 @@
 import { useForm } from '@conform-to/react'
-import { json, type ActionFunctionArgs } from '@remix-run/node'
+import type { MetaFunction, ActionFunctionArgs } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import { z } from 'zod'
 
 import { Form, useActionData, useNavigate } from '@remix-run/react'
@@ -14,6 +15,13 @@ import {
 import { Input } from '~/components/ui/input'
 import { parse } from '@conform-to/zod'
 import { createUserSession, login } from '~/utils/user-session.server'
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Sign In' },
+    { name: 'description', content: 'Sign in to twitter clone' },
+  ]
+}
 
 const signInSchema = z.object({
   email: z.string(),

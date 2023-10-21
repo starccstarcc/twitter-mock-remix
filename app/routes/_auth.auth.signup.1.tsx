@@ -1,9 +1,9 @@
-import {
-  json,
-  type ActionFunctionArgs,
-  redirect,
-  type LoaderFunctionArgs,
+import type {
+  MetaFunction,
+  LoaderFunctionArgs,
+  ActionFunctionArgs,
 } from '@remix-run/node'
+import { json, redirect } from '@remix-run/node'
 import { Form, useActionData, useNavigate } from '@remix-run/react'
 
 import { parse } from '@conform-to/zod'
@@ -24,6 +24,13 @@ import {
   getOnboardingStepOneData,
 } from '~/utils/onboarding.server'
 import { getUserByEmail } from '~/models/user.server'
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Sign Up - Step 1' },
+    { name: 'description', content: 'Sign up to twitter clone' },
+  ]
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const fd = await request.formData()
@@ -65,7 +72,7 @@ export default function SignUpStepOnePage() {
   })
 
   return (
-    <Dialog open onOpenChange={e => navigate('/auth')}>
+    <Dialog open onOpenChange={() => navigate('/auth')}>
       <DialogContent className="max-w-3xl">
         <div className="flex h-14 items-center gap-6">
           <DialogClose onClick={() => navigate('/auth')} />
