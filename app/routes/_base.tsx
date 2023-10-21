@@ -5,7 +5,6 @@ import {
 } from '@remix-run/node'
 import { Outlet } from '@remix-run/react'
 import { MobileNavigation } from '~/components/mobile-navigation'
-import { TopBar } from '~/components/top-bar'
 import { getUserId } from '~/utils/user-session.server'
 
 export const meta: MetaFunction = () => {
@@ -28,7 +27,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function BaseLayout() {
   return (
     <div className="flex flex-col">
-      <TopBar />
       <Outlet />
       <MobileNavigation />
     </div>
