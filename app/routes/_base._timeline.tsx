@@ -6,15 +6,16 @@ import { UserAvatar } from '~/components/ui/avatar'
 export default function HomePage() {
   const location = useLocation()
 
-  console.log(location)
-
   return (
-    <div className="fixed top-0">
-      <div className="grid h-[53px] grid-cols-[1fr,max-content,1fr] items-center px-4">
-        <UserAvatar />
-        <BrandIcon />
-      </div>
+    <div className="border-secondary sm:max-w-[566px] sm:border-r">
       <div>
+        <div className="grid h-[53px] grid-cols-[1fr,max-content,1fr] items-center px-4 sm:hidden">
+          <UserAvatar />
+          <BrandIcon />
+        </div>
+        <div className="hidden p-4 text-xl font-bold sm:block">
+          <h1>Home</h1>
+        </div>
         <Tabs.Root
           value={location.pathname}
           className="border-b border-secondary"
@@ -38,8 +39,8 @@ export default function HomePage() {
             </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
-        <Outlet />
       </div>
+      <Outlet />
     </div>
   )
 }
