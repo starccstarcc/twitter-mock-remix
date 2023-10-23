@@ -17,7 +17,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-white/10 backdrop-blur-sm',
+      'fixed inset-0 z-50 bg-white/10 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       className,
     )}
     {...props}
@@ -75,13 +75,13 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName
 const DialogClose = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Close>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Close
     ref={ref}
     className="disabled:pointer-events-none"
     {...props}
   >
-    <CloseIcon className="h-8 w-8 text-text" />
+    {children ? children : <CloseIcon className="h-8 w-8 text-text" />}
     <span className="sr-only">Close</span>
   </DialogPrimitive.Close>
 ))
