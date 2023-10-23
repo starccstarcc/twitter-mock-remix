@@ -68,7 +68,7 @@ export async function action({ request }: ActionFunctionArgs) {
     email,
   })
 
-  return createUserSession({ request, userId, redirectTo: '/' })
+  return createUserSession({ request, userId, redirectTo: '/home' })
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {

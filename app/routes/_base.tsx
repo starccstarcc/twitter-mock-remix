@@ -3,13 +3,14 @@ import {
   type LoaderFunctionArgs,
   type MetaFunction,
 } from '@remix-run/node'
-import { NavLink, Outlet } from '@remix-run/react'
+import { Link, NavLink, Outlet, useLocation } from '@remix-run/react'
 import {
   HomeIcon,
   SearchIcon,
   NotificationsIcon,
   MailIcon,
   BrandIcon,
+  AddPostIcon,
 } from '~/components/icons'
 import { UserAvatar } from '~/components/ui/avatar'
 
@@ -72,12 +73,28 @@ function DesktopNavigation() {
         >
           <MailIcon />
         </NavLink>
+        <NewPostIcon />
       </nav>
-
       <div className="flex justify-center">
         <UserAvatar />
       </div>
     </div>
+  )
+}
+
+function NewPostIcon() {
+  const location = useLocation()
+  const isTimelinePage = ['/home', '/following'].includes(location.pathname)
+  const to = isTimelinePage ? `${location.pathname}/tweet` : '/home/tweet'
+
+  return (
+    <Link
+      to={to}
+      aria-label="Add new tweet"
+      className="rounded-full bg-primary p-2"
+    >
+      <AddPostIcon className="h-5 w-5 text-white" />
+    </Link>
   )
 }
 

@@ -47,7 +47,7 @@ export async function action({ request }: ActionFunctionArgs) {
     return json(submission)
   }
 
-  return createUserSession({ request, userId: user.id, redirectTo: '/' })
+  return createUserSession({ request, userId: user.id, redirectTo: '/home' })
 }
 
 export default function SignInPage() {
