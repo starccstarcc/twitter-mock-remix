@@ -14,7 +14,9 @@ export function formatDate(date: string) {
     return `${monthsAgo}mo`
   } else if (daysAgo > 0) {
     return `${daysAgo}d`
-  } else if (hoursAgo < 24) {
+  } else if (hoursAgo < 24 && hoursAgo > 0) {
     return `${hoursAgo}h`
+  } else {
+    return 'now'
   }
 }
