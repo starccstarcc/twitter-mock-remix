@@ -37,6 +37,11 @@ export default function TimelineSubRoutePage() {
       <ScrollArea.Root asChild>
         <main className="h-[calc(100vh-120px)] w-full overflow-hidden">
           <ScrollArea.Viewport className="h-full w-full pb-40 sm:pb-0">
+            {!posts.length ? (
+              <p className="my-10 text-center text-secondary">
+                It looks empty? Start following people!
+              </p>
+            ) : null}
             {posts.map((post, i) => (
               <Post post={post} key={post.id} />
             ))}
