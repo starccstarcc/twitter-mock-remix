@@ -7,7 +7,7 @@ export default function HomePage() {
   const location = useLocation()
 
   return (
-    <div className="relative border-secondary sm:max-w-[566px] sm:border-r">
+    <div className="relative border-secondary sm:w-[566px] sm:border-r">
       <div>
         <div className="grid h-[53px] grid-cols-[1fr,max-content,1fr] items-center px-4 sm:hidden">
           <UserAvatar />

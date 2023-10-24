@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm'
 import {
   index,
   pgTable,
@@ -29,3 +30,37 @@ export const user = pgTable(
 )
 
 export type NewUser = typeof user.$inferInsert
+export type User = typeof user.$inferSelect
+
+export const userRelations = relations(user, ({ many }) => ({
+  posts: many(post),
+}))
+
+export const post = pgTable(
+  'posts',
+  {
+    id: uuid('id').defaultRandom().primaryKey().notNull(),
+    authorId: uuid('author_id').notNull(),
+
+    content: text('content').notNull(),
+
+    createdAt: timestamp('createdAt').defaultNow().notNull(),
+    updatedAt: timestamp('updatedAt').defaultNow().notNull(),
+  },
+  table => {
+    return {
+      postIdx: index('post_idx').on(table.id),
+      authorIdx: index('author_id_idx').on(table.authorId),
+    }
+  },
+)
+
+export type NewPost = typeof post.$inferInsert
+export type Post = typeof post.$inferSelect
+
+export const postsRelations = relations(post, ({ one }) => ({
+  author: one(user, {
+    fields: [post.authorId],
+    references: [user.id],
+  }),
+}))
