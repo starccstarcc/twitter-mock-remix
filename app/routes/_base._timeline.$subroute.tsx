@@ -1,16 +1,44 @@
 import * as ScrollArea from '@radix-ui/react-scroll-area'
-import { Outlet } from '@remix-run/react'
+import { json, type LoaderFunctionArgs } from '@remix-run/node'
+import { Outlet, useLoaderData } from '@remix-run/react'
 import { Post } from '~/components/post'
+import { getPosts } from '~/models/post.server'
+import { getUserId } from '~/utils/user-session.server'
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const userId = await getUserId(request)
+
+  if (!userId) {
+    return json({ posts: [] })
+  }
+
+  const posts = await getPosts()
+
+  return json({
+    posts: posts.map(post => ({
+      id: post.id,
+      content: post.content,
+      createdAt: post.createdAt,
+      author: {
+        id: post.author.id,
+        name: post.author.name,
+        username: post.author.username,
+      },
+    })),
+  })
+}
 
 export default function TimelineSubRoutePage() {
+  const { posts } = useLoaderData<typeof loader>()
+
   return (
     <>
       <Outlet />
       <ScrollArea.Root asChild>
         <main className="h-[calc(100vh-120px)] w-full overflow-hidden">
           <ScrollArea.Viewport className="h-full w-full pb-40 sm:pb-0">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <Post key={i} />
+            {posts.map((post, i) => (
+              <Post post={post} key={post.id} />
             ))}
           </ScrollArea.Viewport>
           <ScrollArea.Scrollbar
