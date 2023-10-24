@@ -1,6 +1,5 @@
 import { relations } from 'drizzle-orm'
 import {
-  index,
   pgTable,
   text,
   timestamp,
@@ -23,7 +22,7 @@ export const user = pgTable(
   },
   table => {
     return {
-      userIdx: index('user_idx').on(table.id),
+      userIdx: uniqueIndex('user_idx').on(table.id),
       emailIdx: uniqueIndex('email_idx').on(table.email),
     }
   },
@@ -49,8 +48,8 @@ export const post = pgTable(
   },
   table => {
     return {
-      postIdx: index('post_idx').on(table.id),
-      authorIdx: index('author_id_idx').on(table.authorId),
+      postIdx: uniqueIndex('post_idx').on(table.id),
+      authorIdx: uniqueIndex('author_id_idx').on(table.authorId),
     }
   },
 )
